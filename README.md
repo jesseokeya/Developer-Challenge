@@ -1,2 +1,2 @@
-# developer-challenge
-Shopify Developer Internship Challenge
+# Developer-Challenge
+Shopify Developer Internship Challenge - Summer 2019
