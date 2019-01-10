@@ -4,6 +4,7 @@ const Koa = require('koa')
 const logger = require('koa-logger')
 const json = require('koa-json')
 const cors = require('koa2-cors')
+const yaml = require('yamljs')
 const bodyParser = require('koa-bodyparser')
 const koaSwagger = require('koa2-swagger-ui')
 const { ApolloServer } = require('apollo-server-koa')
@@ -26,8 +27,10 @@ app.use(json())
 app.use(bodyParser())
 
 app.use(koaSwagger({ 
-    routePrefix: `/`, 
-    swaggerOptions: { url: `http://petstore.swagger.io/v2/swagger.json` }, 
+    routePrefix: `/`,
+    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+    docExpansion: 'none',
+    swaggerOptions: { url: yaml.load('./api-docs.yml') }, 
     title: 'Developer Challenge',
     favicon16: favicon,
     favicon32: favicon,
