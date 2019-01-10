@@ -12,7 +12,7 @@ const { version, mongoURI, favicon } = require('./config')
 const routes = require('./routes')
 const { schema } = require('./schema');
 
-const port = process.env.PORT || 3004
+const port = process.env.PORT || 8080
 const environment = process.env.NODE_ENV || 'Production'
 
 const app = new Koa()

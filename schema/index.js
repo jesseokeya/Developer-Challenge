@@ -1,17 +1,9 @@
 const { makeExecutableSchema } = require('apollo-server');
-const { gql } = require('apollo-server-koa')
+const typeDefs = require('./types')
+const Query = require('../queries')
+const Mutation = require('../mutations')
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!'
-  },
-};
+const resolvers = { Query, Mutation };
 
 const schema = makeExecutableSchema({
   typeDefs,

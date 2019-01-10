@@ -1,0 +1,14 @@
+version: "3"
+services:
+  developer-challenge:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    volumes:
+     - /developer-challenge/node_modules
+     - ./:/developer-challenge
+    environment:
+      - NODE_ENV=Development
+      - PORT=8080
+    ports:
+      - "3003:8080"
