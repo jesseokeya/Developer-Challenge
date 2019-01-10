@@ -1,0 +1,25 @@
+{
+  "name": "developer-challenge",
+  "version": "1.0.0",
+  "description": "Shopify Developer Internship Challenge - Summer 2019",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesseokeya/Developer-Challenge.git"
+  },
+  "keywords": [
+    "nodejs",
+    "graphql",
+    "apollo",
+    "js"
+  ],
+  "author": "Jesse Okeya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesseokeya/Developer-Challenge/issues"
+  },
+  "homepage": "https://github.com/jesseokeya/Developer-Challenge#readme"
+}
