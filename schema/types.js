@@ -1,33 +1,49 @@
 const { gql } = require('apollo-server-koa')
 
 const typeDefs = gql`
-  type Todo {
-    id: String!
-    text: String!
-    completed: Boolean!
+  type Product {
+    title: String!
+    price: Int
+    inventory_count: Int
   }
 
-  type TodoList {
-    todos: [Todo]
+  type User {
+    role: String
+    username: String!
+    email: String!
+  }
+
+  type Inventory {
+    store: Store
+    products: [Product]
+  }
+
+  type Cart {
+    user: User
+    product: Product
+    inventory: Inventory
+  }
+
+  type Store {
+    name: String!
+    userID: ID!
   }
 
   type Query {
-    todoList: TodoList
+    products: [Product]
+    product(id: ID!): Product
+    users: [User]
+    user(id: ID!): User
+    inventories: [Inventory]
+    inventory(id: ID!): Inventory
+    carts: [Cart]
+    cart(id: ID!): Cart
   }
 
   type Mutation {
-    addTodo(
-      text: String!
-    ): Todo,
-    toggleTodo(
-      id: String!
-    ): Todo
-  }
-
-  schema {
-    query: Query
-    mutation: Mutation
+    createUser(username: String!, password: String!, email: String): User
   }
 `;
+
 
 module.exports = typeDefs

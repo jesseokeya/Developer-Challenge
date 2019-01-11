@@ -1,5 +1,5 @@
 module.exports = {
     Mutation: {
-        addTodo: () => 'Hello world!'
+        createUser: (parent, args) => {}
     }
 }
