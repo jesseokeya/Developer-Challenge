@@ -6,7 +6,7 @@ const cartSchema = new mongoose.Schema({
 
     productId: mongoose.Schema.ObjectId,
 
-    invetoryId: mongoose.Schema.ObjectId
+    inventoryId: mongoose.Schema.ObjectId
 
 }, { timestamps: true })
 

@@ -7,6 +7,10 @@ const typeDefs = gql`
     inventory_count: Int
   }
 
+  type Auth {
+    token: String!
+  }
+
   type User {
     role: String
     username: String!
@@ -41,7 +45,19 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, password: String!, email: String): User
+    createUser(username: String!, password: String!, email: String): User,
+    login(username: String!, password: String!): Auth,
+    createProduct(title: String!, price: Int!, inventory_count: Int!): Product,
+    createCart(userId: ID!, productId: ID!, inventoryId: ID!): Cart,
+    createInventory(storeName: String!, userId: ID!, products: [ID]): Inventory,
+    updateUser(userId: ID!, username: String, password: String, email: String): User,
+    updateCart(productId: ID!, inventoryId: ID!): Cart,
+    updateProduct(productId: ID!, title: String, price: Int, inventory_count: Int): Product,
+    updateInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
+    deleteCart(cartId: ID!): Cart,
+    deleteUser(userId: ID!): User,
+    deleteProduct(productId: ID!): Product,
+    deleteInventory(inventoryId: ID!): Inventory
   }
 `;
 

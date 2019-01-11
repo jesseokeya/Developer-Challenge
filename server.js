@@ -40,5 +40,11 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
+app.use(({ response })=> {
+  if (response.status === 404) {
+    response.redirect('/graphql')
+  }
+})
+
 const message = `🚀  ${environment} server ready at http://localhost:${port}${server.graphqlPath}`
 app.listen({ port }, _ => console.log(message))
