@@ -11,4 +11,4 @@ services:
       - NODE_ENV=Development
       - PORT=8080
     ports:
-      - "3003:8080"
+      - "8080:8080"

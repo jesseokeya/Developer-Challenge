@@ -6,9 +6,7 @@ class UserDao {
         this.options = options
     }
 
-    async createUser({ username, email, password }) {
-
-    }
+    async createUser({ username, email, password }) { }
 
     async getUsers() { return User.find() }
 
