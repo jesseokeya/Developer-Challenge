@@ -8,7 +8,6 @@ const yaml = require('yamljs')
 const bodyParser = require('koa-bodyparser')
 const koaSwagger = require('koa2-swagger-ui')
 const { ApolloServer } = require('apollo-server-koa')
-const { MemcachedCache } = require('apollo-server-cache-memcached');
 const { version, mongoURI, favicon } = require('./config')
 
 /* Register Monggose Models */
@@ -46,15 +45,9 @@ app.use(koaSwagger({
 
 const server = new ApolloServer({
   schema,
-  persistedQueries: {
-    cache: new MemcachedCache(
-      ['memcached-server-1', 'memcached-server-2', 'memcached-server-3'],
-      { retries: 10, retry: 10000 }, // Options
-    ),
-  },
-  context: ({ req }) => ({
-		authScope: getScope(req.headers.authorization)
-	})
+  context: ({ req }) => {
+		// console.log(req)
+	}
 })
 
 server.applyMiddleware({ app })
