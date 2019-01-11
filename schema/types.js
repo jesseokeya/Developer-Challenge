@@ -15,6 +15,7 @@ const typeDefs = gql`
     role: String
     username: String!
     email: String!
+    password: String!
   }
 
   type Inventory {
