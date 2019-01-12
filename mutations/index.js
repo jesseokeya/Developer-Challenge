@@ -22,20 +22,36 @@ module.exports = {
         createProduct: (_, args) => { 
             return productService.createProduct(args)
         },
-        createCart: (parent, args) => { },
-        createInventory: (parent, args) => { },
+        createCart: (_, args) => { 
+            return cartService.createCart(args)
+        },
+        createInventory: (_, args) => { 
+            return inventoryService.createInventory(args)
+        },
         updateUser: (_, args) => {
             return userService.updateUser(args)
         },
-        updateProduct: (parent, args) => { },
-        updateInventory: (parent, args) => { },
-        updateCart: (parent, args) => { },
+        updateProduct: (_, args) => { 
+            return productService.updateProduct(args)
+        },
+        updateInventory: (_, args) => { 
+            return inventoryService.updateInventory(args)
+        },
+        updateCart: (_, args) => { 
+            return cartService.updateCart(args)
+        },
         deleteUser: (_, { userId }) => {
             return userService.deleteUser(userId)
         },
-        deleteProduct: (parent, args) => { },
-        deleteInventory: (parent, args) => { },
-        deleteCart: (parent, args) => { },
+        deleteProduct: (_, { productId }) => { 
+            return productService.deleteProduct(productId)
+        },
+        deleteInventory: (_, { inventoryId }) => { 
+            return inventoryService.deleteInventory(inventoryId)
+        },
+        deleteCart: (_, { cartId }) => { 
+            return cartService.deleteCart(cartId)
+        },
         login: (_, args) => { 
             const password = args.password || ''
             const username = args.username || ''
