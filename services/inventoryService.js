@@ -16,7 +16,7 @@ class InventoryService {
             }
             const created = await this.inventoryDao.createInventory({ storeName, userId, products })
             return created
-        } catch(err) {
+        } catch (err) {
             throw err
         }
     }
@@ -37,6 +37,21 @@ class InventoryService {
             }
             const inventory = await this.inventoryDao.getInventory(inventoryId)
             return inventory
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async getInventoryByUser(userId) {
+        try {
+            if (isEmpty(userId)) {
+                throw new Error('Bad Request')
+            }
+            const inventory = await this.inventoryDao.getInventoryByUser(userId)
+            return isEmpty(inventory)
+                && inventory.length > 0
+                ? inventory : []
+
         } catch (err) {
             throw err
         }

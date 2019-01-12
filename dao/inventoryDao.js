@@ -42,6 +42,15 @@ class InventoryDao {
     }
 
     /**
+     * Gets a particular inventory by userId
+     * @param {String} userId - users unique identification
+     * @returns {[Object]} - array of inventory object(s)
+     */
+    getInventoryByUser(userId) {
+        return Inventory.find({ store: { userId } }) 
+    }
+
+    /**
      * Updates an exisiting inventory
      * @param {Object} fields - fields to be updated
      * @returns {Object} - inventory object
