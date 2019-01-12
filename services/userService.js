@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const { isEmpty } = require('lodash')
 
 class UserService {
@@ -32,6 +33,8 @@ class UserService {
             if (isEmpty(username) || isEmpty(password)) {
                 throw new Error(`Bad Request`)
             }
+            email = isEmpty(email) ? email : email.toLowerCase()
+            username = username.toLowerCase()
             password = await this._encryptPassword(password)
             const created = await this.userDao.createUser({ username, email, password })
             return created
@@ -68,14 +71,32 @@ class UserService {
     }
 
     async login({ username, email, password }) {
-        
+        if (isEmpty(password)) {
+            throw new Error('Bad Request')
+        }
+        const auth = await this.authenticate({ email, username, password })
+        return auth
     }
 
     async authenticate({ email, username, password }) {
-        if (!isEmpty(email)) {
-
-        } else {
-
+        try {
+            let user = !isEmpty(email)
+                ? await this.userDao.getUserByCustomField({ email })
+                : await this.userDao.getUserByCustomField({ username })
+            if (user.length > 0) {
+                const ctx = user[0]
+                const encryptedPassword = ctx.password
+                const validCredentials = await this._comparePaswords(password, encryptedPassword)
+                if (validCredentials) {
+                    return this._jwtPayload(ctx)
+                } else {
+                    throw new Error('Unauthorized')
+                }
+            } else {
+                throw new Error('Unauthorized')
+            }
+        } catch (err) {
+            throw err
         }
     }
 
@@ -84,6 +105,31 @@ class UserService {
             const saltRounds = 10
             const salt = await bcrypt.genSalt(saltRounds)
             return bcrypt.hash(password, salt)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async _comparePaswords(password, encryptedPassword) {
+        try {
+            return bcrypt.compare(password, encryptedPassword)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async _jwtPayload({ _id, email, username, role }) {
+        try {
+            const token = await jwt.sign({
+                _id,
+                email,
+                username,
+                role,
+                issuer: 'marketplace.api.internal',
+                subType: 'service',
+                aud: 'marketplace.client'
+            }, process.env.JWT_SECRET, { expiresIn: '1h' })
+            return { token }
         } catch (err) {
             throw err
         }

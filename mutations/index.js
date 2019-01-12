@@ -11,7 +11,7 @@ module.exports = {
         createUser: (_, { username, email, password }) => {
             return userService.createUser({ username, email, password })
         },
-        
+
         createProduct: (parent, args) => { },
         createCart: (parent, args) => { },
         createInventory: (parent, args) => { },
@@ -27,6 +27,11 @@ module.exports = {
         deleteProduct: (parent, args) => { },
         deleteInventory: (parent, args) => { },
         deleteCart: (parent, args) => { },
-        login: (parent, args) => { }
+        login: (_, args) => { 
+            const password = args.password || ''
+            const username = args.username || ''
+            const email = args.email || ''
+            return userService.login({ password, email, username })
+        }
     }
 }
