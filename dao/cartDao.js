@@ -7,7 +7,7 @@ const Cart = mongoose.model('Cart')
 class CartDao {
     /**
      * Initalize class
-     * @param {Object} options - class options( default to an empty object if no options are passed in)
+     * @param {Object} options - class options (defaults to an empty object if no options are passed in)
      */
     constructor(options = {}) {
         this.options = options
@@ -50,7 +50,7 @@ class CartDao {
         const _id = fields.cartId
         return Cart.findOneAndUpdate({ _id }, { $set: fields }, { new: true })
     }
-    
+
     /**
      * Deletes a particular cart by Id
      * @param {String} cartId - unique identification
