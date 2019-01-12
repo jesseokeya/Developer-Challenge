@@ -5,11 +5,19 @@ class ProductService {
         this.productDao = productDao
         this.inventoryService = inventoryService
     }
+
     async createProduct({ userId, title, price, inventory_count }) {
         if (isEmpty(userId) || isEmpty(title) || isEmpty(price) || isEmpty(inventory_count)) {
             throw new Error('Bad Request')
         }
-        /* Inventory checks */
+        const user = await this.userDao.getUser(userId)
+        if (isEmpty(user)) {
+            throw new Error('only registered users are allowed to create products')
+        }
+        const inventory = await this.inventoryService.getInventoryByUser(userId)
+        if (!isEmpty(inventory)) {
+
+        }
         const created = await this.productDao.createProduct({ title, price, inventory_count })
         return created
     }

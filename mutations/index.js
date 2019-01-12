@@ -6,14 +6,14 @@ const { UserService, ProductService, InventoryService, CartService } = require('
 
 const inventoryDao = new InventoryDao()
 const inventoryService = new InventoryService({ inventoryDao })
+const userDao = new UserDao()
 
-const userService = new UserService({
-    userDao: new UserDao()
-})
+const userService = new UserService({ userDao })
 
 const productService = new ProductService({
     productDao: new ProductDao(),
-    inventoryService
+    inventoryService,
+    userDao
 })
 
 const cartService = new CartService({ cartDao: new CartDao() })
