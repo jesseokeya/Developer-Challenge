@@ -12,14 +12,6 @@ const typeDefs = gql`
     token: String!
   }
 
-  type User {
-    _id: ID!
-    role: String
-    username: String!
-    email: String!
-    password: String!
-  }
-
   type Inventory {
     _id: ID!
     store: Store
@@ -31,6 +23,16 @@ const typeDefs = gql`
     user: User
     product: Product
     inventory: Inventory
+  }
+
+  type User {
+    _id: ID!
+    role: String
+    username: String!
+    email: String!
+    password: String!
+    inventory: Inventory
+    cart: Cart
   }
 
   type Store {
