@@ -50,6 +50,7 @@ class CartDao {
         const _id = fields.cartId
         return Cart.findOneAndUpdate({ _id }, { $set: fields }, { new: true })
     }
+    
     /**
      * Deletes a particular cart by Id
      * @param {String} cartId - unique identification
