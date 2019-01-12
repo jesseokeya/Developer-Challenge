@@ -6,6 +6,7 @@ const typeDefs = gql`
     title: String!
     price: Int
     inventory_count: Int
+    user: User
   }
 
   type Auth {
