@@ -6,15 +6,18 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: 'customer'
     },
+
     username: {
         type: String,
         required: true,
         unique: true,
     },
+
     password: {
         type: String,
         required: true
     },
+    
     email: String
     
 }, { timestamps: true })

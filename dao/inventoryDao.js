@@ -28,7 +28,7 @@ class InventoryDao {
      * Gets all inventory from mongo database
      * @returns {[Object]} - array of inventory objects
      */
-    async getInventory() { 
+    async getInventories() { 
         return Inventory.find() 
     }
 
