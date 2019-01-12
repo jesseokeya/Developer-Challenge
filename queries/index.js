@@ -5,18 +5,14 @@ const { UserDao, ProductDao, InventoryDao, CartDao } = require('../dao')
 const { UserService, ProductService, InventoryService, CartService } = require('../services')
 
 const inventoryDao = new InventoryDao()
+const userDao = new UserDao()
+const productDao = new ProductDao()
+const cartDao = new CartDao() 
+
 const inventoryService = new InventoryService({ inventoryDao })
-
-const userService = new UserService({
-    userDao: new UserDao()
-})
-
-const productService = new ProductService({
-    productDao: new ProductDao(),
-    inventoryService
-})
-
-const cartService = new CartService({ cartDao: new CartDao() })
+const userService = new UserService({ userDao })
+const productService = new ProductService({ productDao, inventoryService })
+const cartService = new CartService({ cartDao })
 
 module.exports = {
     Query: {

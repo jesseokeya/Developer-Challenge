@@ -54,7 +54,7 @@ const typeDefs = gql`
     createUser(username: String!, password: String!, email: String): User,
     login(email: String, username: String, password: String!): Auth,
     createProduct(userId: ID!, title: String!, price: Int!, inventory_count: Int!): Product,
-    createCart(userId: ID!, productId: ID!, inventoryId: ID!): Cart,
+    createCart(userId: ID!, productId: ID!): Cart,
     createInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
     updateUser(userId: ID!, username: String, password: String, email: String, role: String): User,
     updateCart(productId: ID!, inventoryId: ID!): Cart,

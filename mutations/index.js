@@ -5,18 +5,14 @@ const { UserDao, ProductDao, InventoryDao, CartDao } = require('../dao')
 const { UserService, ProductService, InventoryService, CartService } = require('../services')
 
 const inventoryDao = new InventoryDao()
-const inventoryService = new InventoryService({ inventoryDao })
 const userDao = new UserDao()
+const cartDao = new CartDao()
+const productDao = new ProductDao()
 
+const inventoryService = new InventoryService({ inventoryDao })
 const userService = new UserService({ userDao })
-
-const productService = new ProductService({
-    productDao: new ProductDao(),
-    inventoryService,
-    userDao
-})
-
-const cartService = new CartService({ cartDao: new CartDao() })
+const productService = new ProductService({ productDao, inventoryService, userService })
+const cartService = new CartService({ cartDao, productService, userService })
 
 module.exports = {
     Mutation: {

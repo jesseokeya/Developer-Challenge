@@ -1,16 +1,36 @@
 const { isEmpty } = require('lodash')
 
 class CartService {
-    constructor({ cartDao }) {
+    constructor({ cartDao, productService, userService }) {
         this.cartDao = cartDao
+        this.productService = productService
+        this.userService = userService
     }
 
-    async createCart({ userId, productId, inventoryId }) {
+    async createCart({ userId, productId }) {
         try {
-            if (isEmpty(userId) || isEmpty(productId) || isEmpty(inventoryId)) {
+            if (isEmpty(userId) || isEmpty(productId)) {
                 throw new Error('Bad Request')
             }
-            const created = await this.cartDao.createCart({ userId, productId, inventoryId })
+            /* checks if user exists in the database */
+            const user = await this.userService.getUser(userId)
+            if (isEmpty(user)) {
+                throw new Error('Only registered users are allowed to create carts')
+            }
+            /* checks if a particular product exists in the database */
+            const product = await this.productService.getProduct(productId)
+            if (isEmpty(product)) {
+                throw new Error('Product doesnt exists in the database')
+            }
+            /* checks if a particular product is in stock based on the inventory_count */
+            if (product.inventory_count <= 0) {
+                throw new Error('Not enough product instock')
+            }
+            /* get the inventory associated with the user creating the cart */
+            const inventory = await this.inventoryService.getInventoryByUser(userId)
+            const created = await this.cartDao.createCart({ userId, productId, inventoryId: inventory._id })
+            /* updates the inventory count */
+            await this.productService.updateProduct({ productId, inventory_count: product.inventory_count - 1 })
             return created
         } catch (err) {
             throw err

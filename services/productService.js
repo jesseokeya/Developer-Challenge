@@ -1,24 +1,39 @@
 const { isEmpty } = require('lodash')
 
 class ProductService {
-    constructor({ productDao, inventoryService }) {
+    constructor({ productDao, inventoryService, userService }) {
         this.productDao = productDao
         this.inventoryService = inventoryService
+        this.userService = userService
     }
 
     async createProduct({ userId, title, price, inventory_count }) {
         if (isEmpty(userId) || isEmpty(title) || isEmpty(price) || isEmpty(inventory_count)) {
             throw new Error('Bad Request')
         }
-        const user = await this.userDao.getUser(userId)
+        /* checks if user exists */
+        const user = await this.userService.getUser(userId)
         if (isEmpty(user)) {
             throw new Error('only registered users are allowed to create products')
         }
+        /* creates an new product */
+        const created = await this.productDao.createProduct({ title, price, inventory_count })
+        /* checks if user is associated with an inventory */
         const inventory = await this.inventoryService.getInventoryByUser(userId)
         if (!isEmpty(inventory)) {
-
+            /* updates the inventory to add the newly created product */
+            await this.inventoryService.updateInventory({
+                inventoryId: inventory._id,
+                products: [...inventory.products, created._id]
+            })
+        } else {
+            /* creates a new inventory and associates procduct(s) to it */
+            await this.inventoryService.createInventory({
+                storeName: `${user.username}'s store`,
+                userId,
+                products: [created.id]
+            })
         }
-        const created = await this.productDao.createProduct({ title, price, inventory_count })
         return created
     }
 
