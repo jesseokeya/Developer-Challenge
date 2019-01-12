@@ -37,7 +37,7 @@ app.use(bodyParser())
 const server = new ApolloServer({
   schema,
   context: ({ req }) => {
-		// console.log(req)
+		// check jwt payload
 	}
 })
 

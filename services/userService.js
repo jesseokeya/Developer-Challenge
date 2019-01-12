@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 const { isEmpty } = require('lodash')
 
 class UserService {
-    constructor({ UserDao }) {
-        this.userDao = new UserDao()
+    constructor({ userDao }) {
+        this.userDao = userDao
     }
 
     async getUsers() {

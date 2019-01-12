@@ -1,6 +1,6 @@
 class CartService {
-    constructor(options = {}) {
-        this.options = options
+    constructor({ cartDao }) {
+        this.cartDao = cartDao
     }
 }
 

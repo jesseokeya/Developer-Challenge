@@ -1,6 +1,6 @@
 class InventoryService {
-    constructor(options = {}) {
-        this.options = options
+    constructor({ inventoryDao }) {
+        this.inventoryDao = inventoryDao
     }
 }
 

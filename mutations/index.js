@@ -1,18 +1,31 @@
 /* Data access objects */
-const { UserDao } = require('../dao')
+const { UserDao, ProductDao, InventoryDao, CartDao } = require('../dao')
 
 /* Services */
-const { UserService } = require('../services')
+const { UserService, ProductService, InventoryService, CartService } = require('../services')
 
-const userService = new UserService({ UserDao })
+const inventoryDao = new InventoryDao()
+const inventoryService = new InventoryService({ inventoryDao })
+
+const userService = new UserService({
+    userDao: new UserDao()
+})
+
+const productService = new ProductService({
+    productDao: new ProductDao(),
+    inventoryService
+})
+
+const cartService = new CartService({ cartDao: new CartDao() })
 
 module.exports = {
     Mutation: {
         createUser: (_, { username, email, password }) => {
             return userService.createUser({ username, email, password })
         },
-
-        createProduct: (parent, args) => { },
+        createProduct: (_, { userId, title, price, inventory_count }) => { 
+            return productService.createProduct({ userId, title, price, inventory_count })
+        },
         createCart: (parent, args) => { },
         createInventory: (parent, args) => { },
         updateUser: (_, args) => {
