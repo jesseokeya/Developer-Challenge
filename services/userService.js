@@ -6,6 +6,22 @@ class UserService {
     constructor({ userDao }) {
         this.userDao = userDao
     }
+    
+    async createUser({ username, email, password }) {
+        try {
+            if (isEmpty(username) || isEmpty(password)) {
+                throw new Error(`Bad Request`)
+            }
+            email = isEmpty(email) ? email : email.toLowerCase()
+            username = username.toLowerCase()
+            password = await this._encryptPassword(password)
+            const created = await this.userDao.createUser({ username, email, password })
+            return created
+        } catch (err) {
+            throw err
+        }
+    }
+
 
     async getUsers() {
         try {
@@ -23,21 +39,6 @@ class UserService {
             }
             const user = await this.userDao.getUser(userId)
             return user
-        } catch (err) {
-            throw err
-        }
-    }
-
-    async createUser({ username, email, password }) {
-        try {
-            if (isEmpty(username) || isEmpty(password)) {
-                throw new Error(`Bad Request`)
-            }
-            email = isEmpty(email) ? email : email.toLowerCase()
-            username = username.toLowerCase()
-            password = await this._encryptPassword(password)
-            const created = await this.userDao.createUser({ username, email, password })
-            return created
         } catch (err) {
             throw err
         }
