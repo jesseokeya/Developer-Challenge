@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-koa')
 
 const typeDefs = gql`
   type Product {
+    _id: ID!
     title: String!
     price: Int
     inventory_count: Int
@@ -20,30 +21,33 @@ const typeDefs = gql`
   }
 
   type Inventory {
+    _id: ID!
     store: Store
     products: [Product]
   }
 
   type Cart {
+    _id: ID!
     user: User
     product: Product
     inventory: Inventory
   }
 
   type Store {
+    _id: ID!
     name: String!
     userID: ID!
   }
 
   type Query {
     products: [Product]
-    product(id: ID!): Product
+    product(productId: ID!): Product
     users: [User]
-    user(id: ID!): User
+    user(userId: ID!): User
     inventories: [Inventory]
-    inventory(id: ID!): Inventory
+    inventory(inventoryId: ID!): Inventory
     carts: [Cart]
-    cart(id: ID!): Cart
+    cart(cartId: ID!): Cart
   }
 
   type Mutation {

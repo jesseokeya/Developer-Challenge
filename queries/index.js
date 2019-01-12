@@ -10,8 +10,12 @@ module.exports = {
     Query: {
         products: (parent, args) => { },
         product: (parent, args) => { },
-        users: _ => { return userService.getUsers() },
-        user: (parent, args) => { },
+        users: _ => { 
+            return userService.getUsers() 
+        },
+        user: (_, { userId }) => {
+            return userService.getUser(userId) 
+         },
         inventories: (parent, args) => { },
         inventory: (parent, args) => { },
         carts: (parent, args) => { },
