@@ -12,6 +12,8 @@ const logger = require('koa-logger')
 const json = require('koa-json')
 const cors = require('koa2-cors')
 
+const { MiddlewareService } = require('./services')
+
 const bodyParser = require('koa-bodyparser')
 const { ApolloServer } = require('apollo-server-koa')
 
@@ -20,6 +22,7 @@ const { ObjectId } = mongoose.Types
 
 const port = process.env.PORT || 8080
 const environment = process.env.NODE_ENV || 'Production'
+const middleware = new MiddlewareService()
 
 mongoose.connect(process.env.MONGO_URI, {  useCreateIndex: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise;
@@ -36,8 +39,8 @@ app.use(bodyParser())
 
 const server = new ApolloServer({
   schema,
-  context: ({ req }) => {
-		// check jwt payload
+  context: (ctx) => {
+		middleware.handleAuth(ctx)
 	}
 })
 

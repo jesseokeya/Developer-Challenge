@@ -23,31 +23,24 @@ module.exports = {
         products: _ => {
             return productService.getProducts()
         },
-
-        product: (parent, { productId }) => {
+        product: (_, { productId }) => {
             return productService.getProduct(productId)
         },
-
         users: _ => {
             return userService.getUsers()
         },
-
         user: (_, { userId }) => {
             return userService.getUser(userId)
         },
-
         inventories: _ => {
             return inventoryService.getInventories()
         },
-
         inventory: (_, { inventoryId }) => {
             return inventoryService.getInventory(inventoryId)
         },
-
         carts: _ => {
             return cartService.getCarts()
         },
-
         cart: (_, { cartId }) => {
             return cartService.getCart(cartId)
         }

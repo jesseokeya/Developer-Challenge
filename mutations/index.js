@@ -20,11 +20,11 @@ const cartService = new CartService({ cartDao: new CartDao() })
 
 module.exports = {
     Mutation: {
-        createUser: (_, { username, email, password }) => {
-            return userService.createUser({ username, email, password })
+        createUser: (_, args) => {
+            return userService.createUser(args)
         },
-        createProduct: (_, { userId, title, price, inventory_count }) => { 
-            return productService.createProduct({ userId, title, price, inventory_count })
+        createProduct: (_, args) => { 
+            return productService.createProduct(args)
         },
         createCart: (parent, args) => { },
         createInventory: (parent, args) => { },
