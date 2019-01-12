@@ -6,15 +6,32 @@ class UserDao {
         this.options = options
     }
 
-    async createUser({ username, email, password }) { }
+    async createUser({ username, email, password }) {
+        let newUser = new User({ username, email, password })
+        newUser = await newUser.save()
+        return newUser
+    }
 
-    async getUsers() { return User.find() }
+    async getUsers() {
+        return User.find()
+    }
 
-    async getUser(userId) { return User.findById(userId) }
+    async getUser(userId) {
+        return User.findById(userId)
+    }
 
-    async updateUser(fields) {}
+    async getUserByCustomField(field) {
+        return User.find(field)
+    }
 
-    async deleteUser(userId) {}
+    async updateUser(fields) {
+        const _id = fields.userId
+        return User.findOneAndUpdate({ _id }, { $set: fields }, { new: true })
+    }
+
+    async deleteUser(userId) {
+        return User.findOneAndDelete({ _id: userId })
+    }
 }
 
 module.exports = UserDao

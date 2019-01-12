@@ -16,12 +16,15 @@ const bodyParser = require('koa-bodyparser')
 const { ApolloServer } = require('apollo-server-koa')
 
 const { schema } = require('./schema')
+const { ObjectId } = mongoose.Types
 
 const port = process.env.PORT || 8080
 const environment = process.env.NODE_ENV || 'Production'
 
 mongoose.connect(process.env.MONGO_URI, {  useCreateIndex: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise;
+
+ObjectId.prototype.valueOf = function () { return this.toString() }
 
 const app = new Koa()
 
