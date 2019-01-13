@@ -18,39 +18,20 @@ const userService = new UserService({ userDao })
 const productService = new ProductService({ productDao, inventoryService })
 
 module.exports = {
+    /* Schema Queries */
     Query: {
-        products() {
-            return productService.getProducts()
-        },
-        product(_, { productId }) {
-            return productService.getProduct(productId)
-        },
-        users() {
-            return userService.getUsers()
-        },
-        user(_, { userId }) {
-            return userService.getUser(userId)
-        },
-        inventories() {
-            return inventoryService.getInventories()
-        },
-        inventory(_, { inventoryId }) {
-            return inventoryService.getInventory(inventoryId)
-        },
-        carts() {
-            return cartService.getCarts()
-        },
-        cart(_, { cartId }) {
-            return cartService.getCart(cartId)
-        }
+        products: _ => productService.getProducts(),
+        product: (_, { productId }) => productService.getProduct(productId),
+        users: _ => userService.getUsers(),
+        user: (_, { userId }) => userService.getUser(userId),
+        inventories: _ => inventoryService.getInventories(),
+        inventory: (_, { inventoryId }) => inventoryService.getInventory(inventoryId),
+        carts: _ => cartService.getCarts(),
+        cart: (_, { cartId }) => cartService.getCart(cartId)
     },
     User: {
-        inventory({ _id }) {
-            return inventoryService.getInventoryByUser(_id)
-        },
-        carts({ _id }) {
-            return cartService.getCartByUser(_id)
-        }
+        inventory: ({ _id }) => inventoryService.getInventoryByUser(_id),
+        carts: ({ _id }) => cartService.getCartByUser(_id)
     },
     Inventory: {
         products({ products }) {
@@ -58,20 +39,14 @@ module.exports = {
                 products.map(productId => productService.getProduct(productId))
             )
             return products
-        },
+        }
     },
     Cart: {
-        product({ productId }) {
-            return productService.getProduct(productId)
-        },
-        inventory({ inventoryId }) {
-            return inventoryService.getInventory(inventoryId)
-        }
+        product: ({ productId }) => productService.getProduct(productId),
+        inventory: ({ inventoryId }) => inventoryService.getInventory(inventoryId)
     },
     Store: {
-        user({ userId }) {
-            return userService.getUser(userId)
-        }
+        user: ({ userId }) => userService.getUser(userId)
     },
     Product: {
         async user({ _id }) {
@@ -79,12 +54,10 @@ module.exports = {
             const user = !isEmpty(inventory) ? await userService.getUser(inventory.store.userId) : null
             return user
         },
-        inventory({ _id }) { 
-            return inventoryService.getByProduct(_id)
-        }
+        inventory: ({ _id }) => inventoryService.getByProduct(_id)
     },
     Auth: {
-        user({ token }) { 
+        user({ token }) {
             const decoded = jwtDecode(token)
             if (!(Date.now() / 1000 > decoded.exp)) {
                 return userService.getUser(decoded._id)
