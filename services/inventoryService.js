@@ -14,7 +14,7 @@ class InventoryService {
             if (!isEmpty(products) && products.length > 0) {
                 products = products.filter(productId => mongoose.Types.ObjectId(productId))
             }
-            const created = await this.inventoryDao.createInventory({ storeName, userId, products })
+            const created = await this.inventoryDao.createInventory({ store: { name: storeName, userId }, products })
             return created
         } catch (err) {
             throw err
@@ -48,9 +48,20 @@ class InventoryService {
                 throw new Error('Bad Request')
             }
             const inventory = await this.inventoryDao.getInventoryByUser(userId)
-            return isEmpty(inventory)
-                && inventory.length > 0
-                ? inventory : []
+            return inventory
+
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async getByProduct(productId) {
+        try {
+            if (isEmpty(productId)) {
+                throw new Error('Bad Request')
+            }
+            const inventory = await this.inventoryDao.getInventoryByProduct(productId)
+            return inventory
 
         } catch (err) {
             throw err

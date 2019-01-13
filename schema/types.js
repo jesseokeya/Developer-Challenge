@@ -6,11 +6,13 @@ const typeDefs = gql`
     title: String!
     price: Int
     inventory_count: Int
-    user: User
+    user: User,
+    inventory: Inventory
   }
 
   type Auth {
     token: String!
+    user: User!
   }
 
   type Inventory {
@@ -33,13 +35,13 @@ const typeDefs = gql`
     email: String!
     password: String!
     inventory: Inventory
-    cart: Cart
+    carts: [Cart]
   }
 
   type Store {
     _id: ID!
     name: String!
-    userID: ID!
+    user: User
   }
 
   type Query {

@@ -46,8 +46,20 @@ class InventoryDao {
      * @param {String} userId - users unique identification
      * @returns {[Object]} - array of inventory object(s)
      */
-    getInventoryByUser(userId) {
-        return Inventory.find({ store: { userId } }) 
+    async getInventoryByUser(userId) {
+        const inventories = await Inventory.find() 
+        const inventory = inventories.filter(inventory => inventory.store.userId.toString() === userId.toString())
+        return inventory.length > 0 ? inventory[0] : {}
+    }
+
+    /**
+     * Gets a particular inventory by productId
+     * @param {String} productId - product unique identification
+     * @returns {[Object]} - array of inventory object(s)
+     */
+    async getInventoryByProduct(productId) {
+        const inventory = await Inventory.find({ products: productId })
+        return inventory.length > 0 ? inventory[0] : {}
     }
 
     /**

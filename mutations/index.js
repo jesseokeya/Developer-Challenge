@@ -4,15 +4,17 @@ const { UserDao, ProductDao, InventoryDao, CartDao } = require('../dao')
 /* Services */
 const { UserService, ProductService, InventoryService, CartService } = require('../services')
 
+/* Initialize data access objects */
 const inventoryDao = new InventoryDao()
 const userDao = new UserDao()
 const cartDao = new CartDao()
 const productDao = new ProductDao()
 
+/* Initialize services */
 const inventoryService = new InventoryService({ inventoryDao })
 const userService = new UserService({ userDao })
 const productService = new ProductService({ productDao, inventoryService, userService })
-const cartService = new CartService({ cartDao, productService, userService })
+const cartService = new CartService({ cartDao, productService, userService, inventoryService })
 
 module.exports = {
     Mutation: {
@@ -53,10 +55,7 @@ module.exports = {
             return cartService.deleteCart(cartId)
         },
         login: (_, args) => { 
-            const password = args.password || ''
-            const username = args.username || ''
-            const email = args.email || ''
-            return userService.login({ password, email, username })
+            return userService.login(args)
         }
     }
 }

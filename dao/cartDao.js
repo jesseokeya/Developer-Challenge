@@ -42,6 +42,15 @@ class CartDao {
     }
 
     /**
+     * Gets a particular cart by Id
+     * @param {String} userId - user unique identification
+     * @returns {Object} - cart object
+     */
+    async getCartByUser(userId) {
+        return Cart.find({ userId })
+    }
+
+    /**
      * Updates an exisiting cart 
      * @param {Object} fields - fields to be updated
      * @returns {Object} - cart object

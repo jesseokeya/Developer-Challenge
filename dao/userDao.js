@@ -14,8 +14,8 @@ class UserDao {
      * @param {Object} params - { username, email, password }
      * @returns {Object} - new User
      */
-    async createUser({ username, email, password }) {
-        let newUser = new User({ username, email, password })
+    async createUser({ username, email, password, role }) {
+        let newUser = new User({ username, email, password, role })
         newUser = await newUser.save()
         return newUser
     }

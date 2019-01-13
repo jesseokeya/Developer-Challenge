@@ -1,10 +1,11 @@
 const { isEmpty } = require('lodash')
 
 class CartService {
-    constructor({ cartDao, productService, userService }) {
+    constructor({ cartDao, productService, userService, inventoryService }) {
         this.cartDao = cartDao
         this.productService = productService
         this.userService = userService
+        this.inventoryService = inventoryService
     }
 
     async createCart({ userId, productId }) {
@@ -27,10 +28,10 @@ class CartService {
                 throw new Error('Not enough product instock')
             }
             /* get the inventory associated with the user creating the cart */
-            const inventory = await this.inventoryService.getInventoryByUser(userId)
+            const inventory = await this.inventoryService.getByProduct(productId)
             const created = await this.cartDao.createCart({ userId, productId, inventoryId: inventory._id })
             /* updates the inventory count */
-            await this.productService.updateProduct({ productId, inventory_count: product.inventory_count - 1 })
+            // await this.productService.updateProduct({ productId, inventory_count: product.inventory_count - 1 })
             return created
         } catch (err) {
             throw err
@@ -51,7 +52,19 @@ class CartService {
             if (isEmpty(cartId)) {
                 throw new Error('Bad Request')
             }
-            const cart = await this.cartDao.getUser(cartId)
+            const cart = await this.cartDao.getCart(cartId)
+            return cart
+        } catch (err) {
+            throw err
+        }
+    }
+
+    async getCartByUser(userId) {
+        try {
+            if (isEmpty(userId)) {
+                throw new Error('Bad Request')
+            }
+            const cart = await this.cartDao.getCartByUser(userId)
             return cart
         } catch (err) {
             throw err
