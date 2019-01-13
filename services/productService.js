@@ -1,12 +1,25 @@
 const { isEmpty } = require('lodash')
 
+/** 
+ * Class representing a productService
+ */
 class ProductService {
+    /**
+     * Initalize class
+     * @param {Object} options - { productDao, inventoryService, userService }
+     */
     constructor({ productDao, inventoryService, userService }) {
         this.productDao = productDao
         this.inventoryService = inventoryService
         this.userService = userService
     }
 
+    /**
+     * creates a new product
+     * @param {Object} params - { userId, title, price, inventory_count }
+     * @return {Object} A new product object
+     * @throws {Error}
+     */
     async createProduct({ userId, title, price, inventory_count }) {
         if (isEmpty(userId) || isEmpty(title) || isEmpty(price.toString()) || isEmpty(inventory_count.toString())) {
             throw new Error('Bad Request')
@@ -39,6 +52,11 @@ class ProductService {
         return created
     }
 
+    /**
+     * Retrieves all products from mongo
+     * @return {[Object]} An array of product objects
+     * @throws {Error}
+     */
     async getProducts() {
         try {
             const products = await this.productDao.getProducts()
@@ -48,6 +66,12 @@ class ProductService {
         }
     }
 
+    /**
+     * Retrieves a particular product by productId
+     * @param {String} productId - product unique identification
+     * @return {Object} product object
+     * @throws {Error}
+     */
     async getProduct(productId) {
         try {
             if (isEmpty(productId)) {
@@ -60,6 +84,12 @@ class ProductService {
         }
     }
 
+    /**
+     * Updates a product by specified fields
+     * @param {Object} fields - field(s) to be updated
+     * @return {Object} updated product object
+     * @throws {Error}
+     */
     async updateProduct(fields) {
         try {
             if (isEmpty(fields.productId)) {
@@ -72,6 +102,12 @@ class ProductService {
         }
     }
 
+    /**
+     * Deletes a product by productId
+     * @param {String} productId - product unique identification
+     * @return {Object} deleted product object
+     * @throws {Error}
+     */
     async deleteProduct(productId) {
         try {
             if (isEmpty(productId)) {

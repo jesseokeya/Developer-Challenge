@@ -14,8 +14,8 @@ class MiddlewareService {
      * checks if authorization token is valid
      * @throws {Error} - 4xx Error Unauthorized
      */
-    handleAuth(ctx) {
-        // console.log(ctx)
+    handleAuth({ request, response }) {
+        // console.log({ request, response })
     }
 }
 
