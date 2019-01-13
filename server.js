@@ -39,9 +39,7 @@ app.use(bodyParser())
 
 const server = new ApolloServer({
   schema,
-  context: ({ ctx }) => {
-		middleware.handleAuth(ctx)
-	}
+  context: ctx => middleware.handleAuth(ctx)
 })
 
 server.applyMiddleware({ app })
