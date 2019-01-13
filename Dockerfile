@@ -13,7 +13,6 @@ RUN apk add --no-cache --virtual .gyp \
     && npm install \
     && apk del .gyp
 
-# Bundle app source
 COPY . .
 
 EXPOSE 8080
