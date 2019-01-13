@@ -1,6 +1,13 @@
 const { isEmpty } = require('lodash')
 
+/** 
+ * Class representing a cartService
+ */
 class CartService {
+    /**
+     * Initalize class
+     * @param {Object} options - { cartDao, productService, userService, inventoryService }
+     */
     constructor({ cartDao, productService, userService, inventoryService }) {
         this.cartDao = cartDao
         this.productService = productService
@@ -8,6 +15,12 @@ class CartService {
         this.inventoryService = inventoryService
     }
 
+    /**
+     * creates a new cart
+     * @param {Object} params - { userId, productId }
+     * @return {Object} A new cart object
+     * @throws {Error}
+     */
     async createCart({ userId, productId }) {
         try {
             if (isEmpty(userId) || isEmpty(productId)) {
@@ -38,6 +51,11 @@ class CartService {
         }
     }
 
+    /**
+     * Retrieves all carts from mongo
+     * @return {[Object]} An array of cart objects
+     * @throws {Error}
+     */
     async getCarts() {
         try {
             const carts = await this.cartDao.getCarts()
@@ -47,6 +65,12 @@ class CartService {
         }
     }
 
+    /**
+     * Retrieves a cart by cartId
+     * @param {String} cartId - cart unique identification
+     * @return {Object} cart object
+     * @throws {Error}
+     */
     async getCart(cartId) {
         try {
             if (isEmpty(cartId)) {
@@ -59,6 +83,12 @@ class CartService {
         }
     }
 
+    /**
+     * Retrieves a cart by associated userId
+     * @param {String} userId - user unique identification
+     * @return {Object} cart object
+     * @throws {Error}
+     */
     async getCartByUser(userId) {
         try {
             if (isEmpty(userId)) {
@@ -71,6 +101,12 @@ class CartService {
         }
     }
 
+    /**
+     * Updates a cart by specified fields
+     * @param {Object} fields - field(s) to be updated
+     * @return {Object} updated cart object
+     * @throws {Error}
+     */
     async updateCart(fields) {
         try {
             if (isEmpty(fields.inventoryId)) {
@@ -82,7 +118,12 @@ class CartService {
             throw err
         }
     }
-
+    /**
+     * Deletes a cart by cartId
+     * @param {String} cartId - cart unique identification
+     * @return {Object} deleted cart object
+     * @throws {Error}
+     */
     async deleteCart(cartId) {
         try {
             if (isEmpty(cartId)) {
