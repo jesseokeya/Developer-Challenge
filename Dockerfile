@@ -6,12 +6,14 @@ WORKDIR /developer-challenge
 # Install app dependencies
 COPY package*.json ./
 
-RUN apk add --no-cache --virtual .gyp \
-        python \
-        make \
-        g++ \
+# --no-cache: download package index on-the-fly, no need to cleanup afterwards
+# --virtual: bundle packages, remove whole bundle at once, when done
+RUN apk --no-cache --virtual build-dependencies add \
+    python \
+    make \
+    g++ \
     && npm install \
-    && apk del .gyp
+    && apk del build-dependencies
 
 COPY . .
 
