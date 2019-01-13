@@ -4,7 +4,7 @@ FROM node:alpine
 WORKDIR /developer-challenge
 
 # Install app dependencies
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
 
