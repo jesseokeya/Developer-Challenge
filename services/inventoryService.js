@@ -1,11 +1,24 @@
 const mongoose = require('mongoose')
 const { isEmpty } = require('lodash')
 
+/** 
+ * Class representing a inventoryService
+ */
 class InventoryService {
+    /**
+     * Initalize class
+     * @param {Object} options - { inventoryDao }
+     */
     constructor({ inventoryDao }) {
         this.inventoryDao = inventoryDao
     }
 
+    /**
+     * creates a new cart
+     * @param {Object} params - { storeName, userId, products }
+     * @return {Object} A new inventory object
+     * @throws {Error}
+     */
     async createInventory({ storeName, userId, products }) {
         try {
             if (isEmpty(userId)) {
@@ -21,6 +34,11 @@ class InventoryService {
         }
     }
 
+    /**
+     * Retrieves all inventories from mongo
+     * @return {[Object]} An array of invenroty objects
+     * @throws {Error}
+     */
     async getInventories() {
         try {
             const inventories = this.inventoryDao.getInventories()
@@ -30,6 +48,12 @@ class InventoryService {
         }
     }
 
+    /**
+     * Retrieves inventory by inventoryId
+     * @param {String} inventoryId - inventory unique identification
+     * @return {Object} cart object
+     * @throws {Error}
+     */
     async getInventory(inventoryId) {
         try {
             if (isEmpty(inventoryId)) {
@@ -42,6 +66,12 @@ class InventoryService {
         }
     }
 
+    /**
+     * Retrieves inventory by merchnt's userId
+     * @param {String} userId - user unique identification
+     * @return {Object} inventory object
+     * @throws {Error}
+     */
     async getInventoryByUser(userId) {
         try {
             if (isEmpty(userId)) {
@@ -55,6 +85,12 @@ class InventoryService {
         }
     }
 
+    /**
+     * Retrieves inventory by productId
+     * @param {String} inventoryId - inventory unique identification
+     * @return {Object} inventory object
+     * @throws {Error}
+     */
     async getByProduct(productId) {
         try {
             if (isEmpty(productId)) {
@@ -68,6 +104,12 @@ class InventoryService {
         }
     }
 
+    /**
+     * Updates specified inventory field(s)
+     * @param {Object} fields - field(s) to be updated
+     * @return {Object} inventory object
+     * @throws {Error}
+     */
     async updateInventory(fields) {
         try {
             if (isEmpty(fields.inventoryId)) {
@@ -80,6 +122,12 @@ class InventoryService {
         }
     }
 
+    /**
+     * Deletes a inventory by inventoryId
+     * @param {String} inventoryId - inventory unique identification
+     * @return {Object} deleted inventory object
+     * @throws {Error}
+     */
     async deleteInventory(inventoryId) {
         try {
             if (isEmpty(inventoryId)) {
