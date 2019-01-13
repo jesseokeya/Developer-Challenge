@@ -17,7 +17,7 @@ const productService = new ProductService({ productDao, inventoryService, userSe
 const cartService = new CartService({ cartDao, productService, userService, inventoryService })
 
 module.exports = {
-    /* Schema Mutations */
+    /* Mutation Schema */
     Mutation: {
         /* creates a new user. user roles coud be either an admin, merchant or customer */
         createUser: (_, args) => userService.createUser(args),
