@@ -1,4 +1,4 @@
-FROM node:10.12-alpine
+FROM node:alpine
 
 # Create app directory
 WORKDIR /developer-challenge
