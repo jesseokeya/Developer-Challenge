@@ -2,11 +2,24 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { isEmpty } = require('lodash')
 
+/** 
+ * Class representing a userService
+ */
 class UserService {
+    /**
+     * Initalize class
+     * @param {Object} options - { userDao }
+     */
     constructor({ userDao }) {
         this.userDao = userDao
     }
 
+    /**
+     * creates a new user
+     * @param {Object} params - { username, email, password, role }
+     * @return {Object} A new user object
+     * @throws {Error}
+     */
     async createUser({ username, email, password, role }) {
         try {
             if (isEmpty(username) || isEmpty(password)) {
@@ -23,7 +36,11 @@ class UserService {
         }
     }
 
-
+    /**
+     * Retrieves all users from mongo
+     * @return {[Object]} An array of user objects
+     * @throws {Error}
+     */
     async getUsers() {
         try {
             const users = await this.userDao.getUsers()
@@ -33,6 +50,12 @@ class UserService {
         }
     }
 
+    /**
+     * Retrieves a particular user by userId
+     * @param {String} userId - user unique identification
+     * @return {Object} user object
+     * @throws {Error}
+     */
     async getUser(userId) {
         try {
             if (isEmpty(userId)) {
@@ -45,6 +68,12 @@ class UserService {
         }
     }
 
+    /**
+     * Update a user by specified fields
+     * @param {Object} fields - field(s) to be updated
+     * @return {Object} updated user object
+     * @throws {Error}
+     */
     async updateUser(fields) {
         try {
             if (isEmpty(fields.userId)) {
@@ -60,6 +89,12 @@ class UserService {
         }
     }
 
+    /**
+     * Deletes a user by userId
+     * @param {String} userId - user unique identification
+     * @return {Object} deleted user object
+     * @throws {Error}
+     */
     async deleteUser(userId) {
         try {
             if (isEmpty(userId)) {
@@ -72,6 +107,12 @@ class UserService {
         }
     }
 
+    /**
+     * Generates an auth token for user authentication
+     * @param {Object} params - { username, email, password }
+     * @return {Object} { token }
+     * @throws {Error}
+     */
     async login({ username, email, password }) {
         if (isEmpty(password)) {
             throw new Error('Bad Request')
@@ -80,6 +121,12 @@ class UserService {
         return auth
     }
 
+    /**
+     * Authenticates user based on parms passed in
+     * @param {Object} params - { email, username, password }
+     * @return {<Promise>}
+     * @throws {Error}
+     */
     async authenticate({ email, username, password }) {
         try {
             let user = !isEmpty(email)
@@ -102,6 +149,12 @@ class UserService {
         }
     }
 
+    /**
+     * Encryptes / converts sting password to hash with a one way hashing algorithm
+     * @param {Sting} password - string password
+     * @return {String} hashed password
+     * @throws {Error}
+     */
     async _encryptPassword(password) {
         try {
             const saltRounds = 10
@@ -112,6 +165,13 @@ class UserService {
         }
     }
 
+    /**
+     * Compres string to hashed string for validating user password
+     * @param {Sting} password - string password
+     * @param {Sting} encryptedPassword - hashed password stored in mongo
+     * @return {Boolean} 
+     * @throws {Error}
+     */
     async _comparePaswords(password, encryptedPassword) {
         try {
             return bcrypt.compare(password, encryptedPassword)
@@ -120,6 +180,12 @@ class UserService {
         }
     }
 
+    /**
+     * Creates a jwt token 
+     * @param {Object} params - { _id, email, username, role }
+     * @return {<Promise>} token
+     * @throws {Error}
+     */
     async _jwtPayload({ _id, email, username, role }) {
         try {
             const token = await jwt.sign({
