@@ -16,13 +16,14 @@ class MiddlewareService {
      * checks if authorization token is valid
      * @throws {Error} - 4xx Error Unauthorized
      */
-    handleAuth({ ctx: { request } }) {
-        console.log(request)
-        const header = request.header
-        if (isEmpty(header.authorization)) {
-            console.log(header)
-            // throw new Error('Unauthorized')
-        }
+    handleAuth({ ctx }) {
+        console.log(ctx)
+        // console.log(request)
+        // const header = request.header
+        // if (isEmpty(header.authorization)) {
+        //     console.log(header)
+        //     // throw new Error('Unauthorized')
+        // }
     }
 }
 

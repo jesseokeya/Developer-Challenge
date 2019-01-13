@@ -4,7 +4,7 @@
   "description": "Shopify Developer Internship Challenge - Summer 2019",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest test/**/**/*.test.js",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "bcrypt": "^3.0.3",
     "dotenv": "^6.2.0",
     "graphql": "^14.0.2",
+    "jest": "^23.6.0",
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
     "koa": "^2.6.2",
