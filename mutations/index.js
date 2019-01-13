@@ -17,45 +17,33 @@ const productService = new ProductService({ productDao, inventoryService, userSe
 const cartService = new CartService({ cartDao, productService, userService, inventoryService })
 
 module.exports = {
+    /* Schema Mutations */
     Mutation: {
-        createUser: (_, args) => {
-            return userService.createUser(args)
-        },
-        createProduct: (_, args) => { 
-            return productService.createProduct(args)
-        },
-        createCart: (_, args) => { 
-            return cartService.createCart(args)
-        },
-        createInventory: (_, args) => { 
-            return inventoryService.createInventory(args)
-        },
-        updateUser: (_, args) => {
-            return userService.updateUser(args)
-        },
-        updateProduct: (_, args) => { 
-            return productService.updateProduct(args)
-        },
-        updateInventory: (_, args) => { 
-            return inventoryService.updateInventory(args)
-        },
-        updateCart: (_, args) => { 
-            return cartService.updateCart(args)
-        },
-        deleteUser: (_, { userId }) => {
-            return userService.deleteUser(userId)
-        },
-        deleteProduct: (_, { productId }) => { 
-            return productService.deleteProduct(productId)
-        },
-        deleteInventory: (_, { inventoryId }) => { 
-            return inventoryService.deleteInventory(inventoryId)
-        },
-        deleteCart: (_, { cartId }) => { 
-            return cartService.deleteCart(cartId)
-        },
-        login: (_, args) => { 
-            return userService.login(args)
-        }
+        /* creates a new user. user roles coud be either an admin, merchant or customer */
+        createUser: (_, args) => userService.createUser(args),
+        /* creates a new product which is associated with a merchant's inventory */
+        createProduct: (_, args) => productService.createProduct(args),
+        /* creates a new cart which is associted with an inventory, product and a user */
+        createCart: (_, args) => cartService.createCart(args),
+        /* creates a new inventory which is associated with a merchant user */
+        createInventory: (_, args) => inventoryService.createInventory(args),
+        /* updates a particular user with the params in args */
+        updateUser: (_, args) => userService.updateUser(args),
+        /* updates a product with the params in args */
+        updateProduct: (_, args) => productService.updateProduct(args),
+        /* updates an inventory with the params in args */
+        updateInventory: (_, args) => inventoryService.updateInventory(args),
+        /* updates a particular cart with the params in args */
+        updateCart: (_, args) => cartService.updateCart(args),
+        /* deletes a particular user by userId */
+        deleteUser: (_, { userId }) => userService.deleteUser(userId),
+        /* deletes a particular product by productId */
+        deleteProduct: (_, { productId }) => productService.deleteProduct(productId),
+        /* deletes a particular inventory by inventoryId */
+        deleteInventory: (_, { inventoryId }) => inventoryService.deleteInventory(inventoryId),
+        /* deletes a particular cart by cartId */
+        deleteCart: (_, { cartId }) => cartService.deleteCart(cartId),
+        /* validates users credentials and genarates a jwt token */
+        login: (_, args) => userService.login(args)
     }
 }
