@@ -86,7 +86,7 @@ class ProductService {
     }
 
     /**
-     * Retrieves a particular product by productId
+     * Retrieve a particular product by productId
      * @param {String} productId - product unique identification
      * @return {Object} product object
      * @throws {Error}
