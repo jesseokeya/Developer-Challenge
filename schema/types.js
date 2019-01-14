@@ -24,7 +24,7 @@ const typeDefs = gql`
   type Cart {
     _id: ID!
     user: User
-    product: Product
+    products: [Product]
     inventory: Inventory
   }
 

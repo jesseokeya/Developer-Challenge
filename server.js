@@ -52,7 +52,7 @@ server.applyMiddleware({ app })
 app.use(({ response, request }) => {
   const invalidStatus = response.status === 404
   const allowedUrls = ['/signup', '/login']
-  if (!allowedUrls.includes(request.url.toLowerCase()) || invalidStatus) { response.redirect('/graphql') }
+  if (!allowedUrls.includes(request.url.toLowerCase()) || !invalidStatus) { response.redirect('/graphql') }
 })
 
 const message = `🚀  ${environment} server ready at http://localhost:${port}${server.graphqlPath}`

@@ -17,7 +17,7 @@ const cartDao = new CartDao()
 const inventoryService = new InventoryService({ inventoryDao })
 const cartService = new CartService({ cartDao })
 const userService = new UserService({ userDao })
-const productService = new ProductService({ productDao, inventoryService })
+const productService = new ProductService({ productDao, inventoryService, cartService })
 
 module.exports = {
     /* Query Schema */
@@ -59,7 +59,7 @@ module.exports = {
      /* Cart Schema */
     Cart: {
         /* retrieves product with a particular cart */
-        product: ({ productId }) => productService.getProduct(productId),
+        products: ({ userId }) => productService.getProductsByUser(userId),
         /* retrieves inventory where the cart product exists in */
         inventory: ({ inventoryId }) => inventoryService.getInventory(inventoryId)
     },

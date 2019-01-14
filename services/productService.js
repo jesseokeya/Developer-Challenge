@@ -8,10 +8,11 @@ class ProductService {
      * Initalize class
      * @param {Object} options - { productDao, inventoryService, userService }
      */
-    constructor({ productDao, inventoryService, userService }) {
+    constructor({ productDao, inventoryService, userService, cartService }) {
         this.productDao = productDao
         this.inventoryService = inventoryService
         this.userService = userService
+        this.cartService = cartService
     }
 
     /**
@@ -79,6 +80,25 @@ class ProductService {
             }
             const product = await this.productDao.getProduct(productId)
             return product
+        } catch (err) {
+            throw err
+        }
+    }
+
+    /**
+     * Retrieves a particular product by productId
+     * @param {String} productId - product unique identification
+     * @return {Object} product object
+     * @throws {Error}
+     */
+    async getProductsByUser(userId) {
+        try {
+            if (isEmpty(userId)) {
+                throw new Error('Bad Request') 
+            }
+            const carts = await this.cartService.getCartByUser(userId)
+            const products = await Promise.all(carts.map(product => this.getProduct(product.productId)))
+            return products
         } catch (err) {
             throw err
         }

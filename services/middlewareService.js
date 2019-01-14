@@ -17,7 +17,7 @@ class MiddlewareService {
      * @throws {Error} - 4xx Error Unauthorized
      */
     handleAuth({ ctx }) {
-        console.log(ctx)
+        // console.log(ctx)
         // console.log(request)
         // const header = request.header
         // if (isEmpty(header.authorization)) {
