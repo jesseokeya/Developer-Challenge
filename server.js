@@ -24,7 +24,7 @@ const port = process.env.PORT || 8080
 const environment = process.env.NODE_ENV || 'Production'
 const middleware = new MiddlewareService()
 
-mongoose.connect(process.env.MONGO_URI, {  useCreateIndex: true, useNewUrlParser: true })
+mongoose.connect(process.env.MONGO_URI, { useCreateIndex: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise;
 
 ObjectId.prototype.valueOf = function () { return this.toString() }
@@ -44,8 +44,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
-app.use(({ response })=> {
-  if (response.status === 404) { response.redirect('/graphql') }
+app.use(({ response }) => {
+  console.log(response.originalUrl)
+  const allowedUrls = ['/signup', '/login']
+  if (allowedUrls.includes(response.originalUrl)) { response.redirect('/graphql') }
 })
 
 const message = `🚀  ${environment} server ready at http://localhost:${port}${server.graphqlPath}`
