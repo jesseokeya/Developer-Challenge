@@ -3,10 +3,6 @@ runtime: custom
 service: default
 threadsafe: yes
 
-network:
-forwarded_ports:
-- 80:8080
-
 manual_scaling:
   instances: 1
 resources:

@@ -12,6 +12,7 @@ const logger = require('koa-logger')
 const json = require('koa-json')
 const cors = require('koa2-cors')
 
+const router = require('./routes')
 const { MiddlewareService } = require('./services')
 
 const bodyParser = require('koa-bodyparser')
@@ -37,6 +38,10 @@ app.use(cors())
 app.use(json())
 app.use(bodyParser())
 
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
+
 const server = new ApolloServer({
   schema,
   context: ctx => middleware.handleAuth(ctx)
@@ -44,10 +49,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
-app.use(({ response }) => {
-  console.log(response.originalUrl)
+app.use(({ response, request }) => {
+  const invalidStatus = response.status === 404
   const allowedUrls = ['/signup', '/login']
-  if (allowedUrls.includes(response.originalUrl)) { response.redirect('/graphql') }
+  if (!allowedUrls.includes(request.url.toLowerCase()) || invalidStatus) { response.redirect('/graphql') }
 })
 
 const message = `🚀  ${environment} server ready at http://localhost:${port}${server.graphqlPath}`
