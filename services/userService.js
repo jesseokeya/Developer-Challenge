@@ -117,6 +117,8 @@ class UserService {
         if (isEmpty(password)) {
             throw new Error('Bad Request')
         }
+        username = !isEmpty(username) ? username.toLowerCase() : ''
+        email = !isEmpty(email) ? email.toLowerCase() : ''
         const auth = await this.authenticate({ email, username, password })
         return auth
     }
