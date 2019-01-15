@@ -45,16 +45,17 @@ docker-compose up --build
 ```
 
 ## Explanation
-```
-Give an example
-```
+Schema supports 2 user roles `merchant` and `customer`. `merchant` can create products which will be associated with an inventory and a store. The `customer` can only purchase items by adding it to his / her cart this will also decrement the inventory_count of a particular item.
+
 ### Security
 ![](/images/secure.png?raw=true)
-```
-tokens
-```
-### Adding Products To Cart
+I created post endpoints `/api/login` and `/api/signup` to login and create a new user respespectively. when a user is logs in a jwt token is generated and sent to the client with a 1 hour ttl. Without a valid jwt token you wont be a make queries or mutations to graphql.
 
+Made a token just for you below 🙂. Test it out by adding it to the authorization header
+
+```
+token
+```
 
 ## Deployment
 Once travis-ci detects a change to the master branch a new build occurs which runs my unit, component and integration tests then the graphql application will be deployed to google's flexible app engine. which is built directly from the Dockerfile
