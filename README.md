@@ -45,7 +45,7 @@ docker-compose up --build
 ```
 
 ## Explanation
-Schema supports 2 user roles `merchant` and `customer`. `merchant` can create products which will be associated with an inventory and a store. The `customer` can only purchase items by adding it to his / her cart this will also decrement the inventory_count of a particular item.
+Schema supports 2 user roles `merchant` and `customer`. `merchant` can create products which will be associated with an inventory and a store. The `customer` can only purchase items by adding it to his / her cart this will also decrement the inventory_count for the particular item purchased.
 
 ### Security
 ![](/images/secure.png?raw=true)
