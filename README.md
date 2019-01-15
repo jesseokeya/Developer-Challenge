@@ -53,6 +53,7 @@ Give an example
 ```
 tokens
 ```
+### Adding Products To Cart
 
 
 ## Deployment
