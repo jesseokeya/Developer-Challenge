@@ -4,7 +4,7 @@ Shopify Developer Internship Challenge - Summer 2019
 
 **Live Site**: https://developer-intern-challenge.appspot.com/graphql <br/>
 
-**Challenge**: https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/edit?ts=5c2fd489 <br/>
+**Challenge**: https://bit.ly/2RRrr26 <br/>
 
 ![](/images/design.png?raw=true)
 
