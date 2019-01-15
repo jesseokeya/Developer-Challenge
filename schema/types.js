@@ -35,7 +35,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     inventory: Inventory
-    carts: [Cart]
+    cart: [Cart]
   }
 
   type Store {

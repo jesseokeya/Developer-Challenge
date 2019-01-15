@@ -44,7 +44,7 @@ module.exports = {
         /* retrieves a particular merchant user's product inventory */
         inventory: ({ _id }) => inventoryService.getInventoryByUser(_id),
         /* retrieves carts associated with a particular user */
-        carts: ({ _id }) => cartService.getCartByUser(_id)
+        cart: ({ _id }) => cartService.getCartByUser(_id)
     },
     /* Inventory Schema */
     Inventory: {
