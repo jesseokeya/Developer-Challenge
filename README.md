@@ -44,10 +44,16 @@ End with an example of getting some data out of the system or using it for a lit
 docker-compose up --build
 ```
 
-### Explanation
+## Explanation
 ```
 Give an example
 ```
+### Security
+![](/images/secure.png?raw=true)
+```
+tokens
+```
+
 
 ## Deployment
 Once travis-ci detects a change to the master branch a new build occurs which runs my unit, component and integration tests then the graphql application will be deployed to google's flexible app engine. which is built directly from the Dockerfile
