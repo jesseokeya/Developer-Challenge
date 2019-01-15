@@ -4,7 +4,7 @@ Shopify Developer Internship Challenge - Summer 2019
 
 **Live Site**: https://developer-intern-challenge.appspot.com/graphql <br/>
 
-**Challenge**: https://docs.google.com/document/d/1J49NAOIoWYOumaoQCKopPfudWI_jsQWVKlXmw1f1r-4/edit?ts=5c2fd489 <br/>
+**Challenge**: https://bit.ly/2RRrr26 <br/>
 
 ![](/images/design.png?raw=true)
 
@@ -64,4 +64,4 @@ Once travis-ci detects a change to the master branch a new build occurs which ru
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jesseokeya/Developer-Challenge/blob/master/LICENSE) file for details
