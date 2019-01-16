@@ -15,7 +15,7 @@ after_success:
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
   - source /home/travis/google-cloud-sdk/path.bash.inc
   - gcloud auth activate-service-account --key-file serviceAccount.json
-  - gcloud config set project our-dominion-228814
+  - gcloud config set project shopify-challenge-2019
   - gcloud config set compute/zone us-central1-a
   - bash ./deploy.sh
 notifications:
