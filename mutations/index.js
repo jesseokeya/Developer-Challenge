@@ -44,6 +44,8 @@ module.exports = {
         /* deletes a particular cart by cartId */
         deleteCart: (_, { cartId }) => cartService.deleteCart(cartId),
         /* validates users credentials and genarates a jwt token */
-        login: (_, args) => userService.login(args)
+        login: (_, args) => userService.login(args),
+        /* checks out your cart and decrements all product(s) inventoryCount */
+        purchase: (_, args) => cartService.purchaseProducts(args)
     }
 }

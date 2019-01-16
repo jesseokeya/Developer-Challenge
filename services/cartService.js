@@ -118,7 +118,7 @@ class CartService {
             throw err
         }
     }
-    
+
     /**
      * Deletes a cart by cartId
      * @param {String} cartId - cart unique identification
@@ -132,6 +132,20 @@ class CartService {
             }
             const deleted = await this.cartDao.deleteCart(cartId)
             return deleted
+        } catch (err) {
+            throw err
+        }
+    }
+
+    /**
+     * Purcahes / checksout products in cart and empties cart
+     * @param {Object} params - {cartId, userId }
+     * @return {Object} an array of products purchased
+     * @throws {Error}
+     */
+    async purchaseProducts(args) {
+        try {
+
         } catch (err) {
             throw err
         }
