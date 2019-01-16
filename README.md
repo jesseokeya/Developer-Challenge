@@ -2,7 +2,7 @@
 
 Shopify Developer Internship Challenge - Summer 2019
 
-**Live Site**: https://our-dominion-228814.appspot.com/graphql <br/>
+**Live Site**: https://shopify-challenge-2019.appspot.com/graphql <br/>
 
 **Challenge**: https://bit.ly/2RRrr26 <br/>
 
