@@ -16,7 +16,7 @@ const cartDao = new CartDao()
 /* Initialize services */
 const inventoryService = new InventoryService({ inventoryDao })
 const cartService = new CartService({ cartDao, productService: new ProductService({ productDao }) })
-const userService = new UserService({ userDao })
+const userService = new UserService({ userDao, cartService })
 const productService = new ProductService({ productDao, inventoryService, cartService })
 
 module.exports = {

@@ -10,8 +10,9 @@ class UserService {
      * Initalize class
      * @param {Object} options - { userDao }
      */
-    constructor({ userDao }) {
+    constructor({ userDao, cartService }) {
         this.userDao = userDao
+        this.cartService = cartService
     }
 
     /**
@@ -30,6 +31,10 @@ class UserService {
             password = await this._encryptPassword(password)
             role = !isEmpty(role) ? role : 'customer'
             const created = await this.userDao.createUser({ username, email, password, role })
+            if (created.role === 'customer') {
+                /* create empty cart for new customer */
+                await this.cartService.createCart({ userId: created._id, products: [] })
+            }
             return created
         } catch (err) {
             throw err

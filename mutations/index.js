@@ -12,7 +12,13 @@ const productDao = new ProductDao()
 
 /* Initialize services */
 const inventoryService = new InventoryService({ inventoryDao })
-const userService = new UserService({ userDao })
+const userService = new UserService({ 
+    userDao, 
+    cartService: new CartService({ 
+        cartDao, 
+        userService: new UserService({ userDao }) 
+    }) 
+})
 const productService = new ProductService({ productDao, inventoryService, userService })
 const cartService = new CartService({ cartDao, productService, userService, inventoryService })
 
