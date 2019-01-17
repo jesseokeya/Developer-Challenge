@@ -51,6 +51,13 @@ Schema supports 2 user roles `merchant` and `customer`. `merchant` can create pr
 ![](/images/secure.png?raw=true)
 I created post endpoints `/api/login` and `/api/signup` to login and create a new user respespectively. when a user logs in a jwt token is generated and sent to the client with a 1 hour ttl. Without a valid jwt token you wont be a make queries or mutations to graphql. But i disabled that so it would be easier to test 🙂.
 
+But to enable and test for security uncomment line 21 in middlewareService 
+![](/images/authHeader.png?raw=true)
+
+Send a post request to the /api/login endpoint to get a token and add the token to the authorization headers for graphql
+![](/images/postman.png?raw=true)
+
+
 ## Deployment
 Once travis-ci detects a change to the master branch a new build occurs which runs my unit, component and integration tests then the graphql application will be deployed to google's flexible app engine. which is built directly from the Dockerfile
 
