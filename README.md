@@ -77,7 +77,7 @@ We can see the products the merchant would like to sell lets create a customer t
 ```
 
 #### Lets Create A Customer 
-creating customer automatically creates an empty cart for the customer so all you would have to do is add products to the existing cart. customer created below with an empty cart of products
+Creating customer automatically creates an empty cart for the customer so all you would have to do is add products to the existing cart. Customer created below with an empty cart of products
 
 
 ## Deployment
