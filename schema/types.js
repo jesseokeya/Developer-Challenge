@@ -62,9 +62,9 @@ const typeDefs = gql`
     """
     checkout decrements all the inventory_count for products in user cart based on the number of products added to the cart
     """
-    checkout(userId: ID!): [Product]
+    checkout(cartId: ID!): Cart
     createInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
-    addCartProducts(cartId: ID!, products: [ID!]!): Cart
+    addProductsToCart(cartId: ID!, products: [ID!]!): Cart
     updateUser(userId: ID!, username: String, password: String, email: String, role: String): User,
     updateCart(products: [ID!]!, cartId: ID!, userId: ID): Cart,
     updateProduct(productId: ID!, title: String, price: Int, inventory_count: Int): Product,

@@ -48,6 +48,6 @@ module.exports = {
         /* checks out your cart and decrements all product(s) inventoryCount */
         checkout: (_, args) => cartService.checkout(args),
         /* updates cart by adding new products to be checkedout  */
-        addCartProducts: (_, args) => cartService.addCartProducts(args)
+        addProductsToCart: (_, args) => cartService.addCartProducts(args)
     }
 }

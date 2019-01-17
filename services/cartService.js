@@ -43,8 +43,6 @@ class CartService {
                 }
             });
             const created = await this.cartDao.createCart({ userId, products })
-            /* updates the inventory count */
-            // await this.productService.updateProduct({ productId, inventory_count: product.inventory_count - 1 })
             return created
         } catch (err) {
             throw err
@@ -134,7 +132,7 @@ class CartService {
             }
             const products = args.products
             const prevCart = await this.getCart(args.cartId)
-            const cart = await this.updateCart({ cartId, products: [...prevCart.products, ...products] })
+            const cart = await this.updateCart({ cartId: args.cartId, products: [...prevCart.products, ...products] })
             return cart
         } catch (err) {
             throw err
@@ -185,12 +183,20 @@ class CartService {
      */
     async checkout(args) {
         try {
-            const userId = args.userId
-            if (isEmpty(userId)) {
+            const cartId = args.cartId
+            if (isEmpty(cartId)) {
                 throw new Error('Bad Request')
             }
-            const products = await this.getCartByUser(userId)
-            console.log(products)
+            let cart = await this.getCart(cartId)
+            const products = await cart.products
+            products.forEach(async productId => {
+                let product = await this.productService.getProduct(productId)
+                product = await this.productService.updateProduct({ 
+                    productId, inventory_count: product.inventory_count - 1 
+                })
+            })
+            cart = await this.getCart(cartId)
+            return cart
         } catch (err) {
             throw err
         }
