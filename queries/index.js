@@ -83,6 +83,7 @@ module.exports = {
     Auth: {
         /* authetheticates user returning a jwt token and user schema */
         user({ token }) {
+            /* decoded user token */
             const decoded = jwtDecode(token)
             if (!(Date.now() / 1000 > decoded.exp)) {
                 return userService.getUser(decoded._id)
