@@ -44,20 +44,22 @@ End with an example of getting some data out of the system or using it for a lit
 docker-compose up --build
 ```
 
-### Explanation
+## Explanation
 Schema supports 2 user roles `merchant` and `customer`. `merchant` can create products which will be associated with an inventory and a store. The `customer` can only purchase items by adding it to his / her cart this will also decrement the inventory_count for the particular item purchased.
 
-## Security
+### Security
 ![](/images/secure.png?raw=true)
 I created post endpoints `/api/login` and `/api/signup` to login and create a new user respespectively. when a user logs in a jwt token is generated and sent to the client with a 1 hour ttl. Without a valid jwt token you wont be a make queries or mutations to graphql. But i disabled that so it would be easier to test 🙂.
 
 But to enable and test for security uncomment line 21 in middlewareService 
+
 ![](/images/authHeader.png?raw=true)
 
 Send a post request to the `/api/login` endpoint to get a token and add the token to the `authorization` header for graphql
+
 ![](/images/postman.png?raw=true)
 
-## Example
+### Example
 
 
 ## Deployment
