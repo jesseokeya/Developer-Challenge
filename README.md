@@ -68,7 +68,8 @@ A Merchant has a list of products in his inventory which he would like to sell t
 We can see the products the merchant would like to sell lets create a customer that would purchase an `iphonexs`, `Lg Foldable Tv`, a `Macbook Pro 2017` and a `Samsung note 10`. Here is a repsctive list of productIds of products to be purchased below
 
 ```js
-  [
+  /* we will need this to add products to cart */
+  const productIds = [
     "5c405a7f6fd2b752ec7baccd", 
     "5c405ae26fd2b752ec7bacd1", 
     "5c405aae6fd2b752ec7baccf", 
@@ -77,7 +78,18 @@ We can see the products the merchant would like to sell lets create a customer t
 ```
 
 #### Lets Create A Customer 
-creating customer automatically creates an empty cart for the customer so all you would have to do is add products to the existing cart. customer created below with an empty cart of products
+Creating customer automatically creates an empty cart for the customer so all you would have to do is add products to the existing cart. Customer created below with an empty cart of products
+
+![](/images/mockUser.png?raw=true)
+
+Notice we get the cart with an empty list of products now lets add products to cart!
+
+```js
+  /* we will need to identify the users cart for adding products and checking out */
+  const cartId = "5c40b1de1d9c5b687b25962d"
+```
+
+
 
 
 ## Deployment
