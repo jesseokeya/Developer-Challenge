@@ -93,7 +93,7 @@ Remember we kept track of the cartId and productIds. Let now use those to add pr
 
 ![](/images/addProducts.png?raw=true)
 
-Note: Keep track of the inventory_count so we can have refernce when whe checkout the cart to see if the inventory_count would decrement as it should
+Note: Keep track of the inventory_count so we can have reference when we checkout the cart to see if the inventory_count would decrement as it should
 
 #### Lets Checkout the Customers Cart
 From the image below the inventory_count of all products were reduced. 🎉🎉🎉
