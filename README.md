@@ -65,6 +65,12 @@ A Merchant has a list of products in his inventory which he would like to sell t
 #### Merchant's Inventory
 ![](/images/merchant.png?raw=true)
 
+We can see the products the merchant would like to sell lets create a customer that would purchase an `iphonexs`, `Lg Foldable Tv`, a `Macbook Pro 2017` and a `Samsung note 10`. Here is a repsctive list of productIds of products to be purchased below
+
+```js
+  ["5c405a7f6fd2b752ec7baccd", "5c405ae26fd2b752ec7bacd1", "5c405aae6fd2b752ec7baccf", "5c405aca6fd2b752ec7bacd0"]
+```
+
 
 ## Deployment
 Once travis-ci detects a change to the master branch a new build occurs which runs my unit, component and integration tests then the graphql application will be deployed to google's flexible app engine. which is built directly from the Dockerfile
