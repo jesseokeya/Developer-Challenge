@@ -60,6 +60,10 @@ Send a post request to the `/api/login` endpoint to get a token and add the toke
 ![](/images/postman.png?raw=true)
 
 ### Example
+A Merchant has a list of products in his inventory which he would like to sell to customers. Firstly we would create a customer then add products to his/her cart and checkout the cart and the inventory_count should decrement. Lets get started 🏁!
+
+#### Merchant's Inventory
+![](/images/merchant.png?raw=true)
 
 
 ## Deployment
