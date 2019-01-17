@@ -88,8 +88,17 @@ Notice we get the cart with an empty list of products now lets add products to c
   /* we will need to identify the users cart for adding products and checking out */
   const cartId = "5c40b1de1d9c5b687b25962d"
 ```
+#### Lets Add Products To Cart
+Remember we kept track of the cartId and productIds. Let now use those to add products to cart using the `addProductsToCart` mutation
+
 ![](/images/addProducts.png?raw=true)
 
+Note: Keep track of the inventory_count so we can have refernce when whe checkout the cart to see if the inventory_count would decrement as it should
+
+#### Lets Checkout the Customers Cart
+From the image below the inventory_count of all products were reduced. 🎉🎉🎉
+
+Try it out yourself [Online Inventory](https://shopify-challenge-2019.appspot.com/graphql)
 
 
 ## Deployment
