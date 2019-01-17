@@ -25,7 +25,6 @@ const typeDefs = gql`
     _id: ID!
     user: User
     products: [Product]
-    inventory: Inventory
   }
 
   type User {
@@ -59,14 +58,15 @@ const typeDefs = gql`
     createUser(username: String!, password: String!, email: String, role: String): User,
     login(email: String, username: String, password: String!): Auth,
     createProduct(userId: ID!, title: String!, price: Int!, inventory_count: Int!): Product,
-    createCart(userId: ID!, productId: ID!): Cart,
+    createCart(userId: ID!, products: [ID!]!): Cart,
     """
     checkout decrements all the inventory_count for products in user cart based on the number of products added to the cart
     """
     checkout(userId: ID!): [Product]
     createInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
+    addCartProducts(cartId: ID!, products: [ID!]!): Cart
     updateUser(userId: ID!, username: String, password: String, email: String, role: String): User,
-    updateCart(productId: ID!, cartId: ID!): Cart,
+    updateCart(products: [ID!]!, cartId: ID!, userId: ID): Cart,
     updateProduct(productId: ID!, title: String, price: Int, inventory_count: Int): Product,
     updateInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
     deleteCart(cartId: ID!): Cart,

@@ -18,8 +18,8 @@ class CartDao {
      * @param {Object} params - { userId, productId, inventoryId }
      * @returns {Object} - new cart
      */
-    async createCart({ userId, productId, inventoryId }) {
-        let newCart = new Cart({ userId, productId, inventoryId })
+    async createCart({ userId, products }) {
+        let newCart = new Cart({ userId, products })
         newCart = newCart.save()
         return newCart
     }
