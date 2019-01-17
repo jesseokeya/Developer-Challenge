@@ -86,8 +86,10 @@ Notice we get the cart with an empty list of products now lets add products to c
 
 ```js
   /* we will need to identify the users cart for adding products and checking out */
-  const cartId = 5c40b1de1d9c5b687b25962d
+  const cartId = "5c40b1de1d9c5b687b25962d"
 ```
+
+
 
 
 ## Deployment
