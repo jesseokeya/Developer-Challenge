@@ -98,6 +98,8 @@ Note: Keep track of the inventory_count so we can have refernce when whe checkou
 #### Lets Checkout the Customers Cart
 From the image below the inventory_count of all products were reduced. 🎉🎉🎉
 
+![](/images/checkout.png?raw=true)
+
 Try it out yourself [Online Inventory](https://shopify-challenge-2019.appspot.com/graphql)
 
 
