@@ -54,7 +54,7 @@ I created post endpoints `/api/login` and `/api/signup` to login and create a ne
 But to enable and test for security uncomment line 21 in middlewareService 
 ![](/images/authHeader.png?raw=true)
 
-Send a post request to the /api/login endpoint to get a token and add the token to the authorization headers for graphql
+Send a post request to the `/api/login` endpoint to get a token and add the token to the `authorization` header for graphql
 ![](/images/postman.png?raw=true)
 
 
