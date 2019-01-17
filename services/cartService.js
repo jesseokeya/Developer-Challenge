@@ -26,7 +26,6 @@ class CartService {
             if (isEmpty(userId)) {
                 throw new Error('Bad Request')
             }
-            console.log(this.userService)
             /* checks if user exists in the database */
             const user = await this.userService.getUser(userId)
             if (isEmpty(user)) {
