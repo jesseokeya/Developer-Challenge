@@ -103,7 +103,7 @@ class ProductService {
             throw err
         }
     }
-
+    
     /**
      * Updates a product by specified fields
      * @param {Object} fields - field(s) to be updated

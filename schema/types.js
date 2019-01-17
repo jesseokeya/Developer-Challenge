@@ -60,10 +60,13 @@ const typeDefs = gql`
     login(email: String, username: String, password: String!): Auth,
     createProduct(userId: ID!, title: String!, price: Int!, inventory_count: Int!): Product,
     createCart(userId: ID!, productId: ID!): Cart,
-    purchase(userId: ID!, cartId: ID!): [Product]
+    """
+    checkout decrements all the inventory_count for products in user cart based on the number of products added to the cart
+    """
+    checkout(userId: ID!): [Product]
     createInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
     updateUser(userId: ID!, username: String, password: String, email: String, role: String): User,
-    updateCart(productId: ID!, inventoryId: ID!): Cart,
+    updateCart(productId: ID!, cartId: ID!): Cart,
     updateProduct(productId: ID!, title: String, price: Int, inventory_count: Int): Product,
     updateInventory(storeName: String, userId: ID!, products: [ID]): Inventory,
     deleteCart(cartId: ID!): Cart,

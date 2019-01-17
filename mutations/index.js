@@ -46,6 +46,6 @@ module.exports = {
         /* validates users credentials and genarates a jwt token */
         login: (_, args) => userService.login(args),
         /* checks out your cart and decrements all product(s) inventoryCount */
-        purchase: (_, args) => cartService.purchaseProducts(args)
+        checkout: (_, args) => cartService.checkout(args)
     }
 }

@@ -4,7 +4,7 @@ const cartSchema = new mongoose.Schema({
 
     userId: mongoose.Schema.ObjectId,
 
-    productId: mongoose.Schema.ObjectId,
+    products: [mongoose.Schema.ObjectId],
 
     inventoryId: mongoose.Schema.ObjectId
 

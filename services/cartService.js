@@ -65,6 +65,8 @@ class CartService {
         }
     }
 
+    // async 
+
     /**
      * Retrieves a cart by cartId
      * @param {String} cartId - cart unique identification
@@ -102,6 +104,25 @@ class CartService {
     }
 
     /**
+     * Adds a product to cart
+     * @param {Object} params - { cartId, productId }
+     * @return {Object} cart object
+     * @throws {Error}
+     */
+    async addProduct(args) {
+        try {
+            if (isEmpty(args.cartId) || isEmpty(args.productId)) {
+                throw new Error(`Bad Request`)
+            }
+            const prevCart = await this.getCart(args.cartId)
+            const cart = await this.updateCart({ cartId, products: [...prevCart.products, productId] })
+            return cart
+        } catch (err) {
+            throw err
+        }
+    }
+
+    /**
      * Updates a cart by specified fields
      * @param {Object} fields - field(s) to be updated
      * @return {Object} updated cart object
@@ -109,7 +130,7 @@ class CartService {
      */
     async updateCart(fields) {
         try {
-            if (isEmpty(fields.inventoryId)) {
+            if (isEmpty(fields.cartId)) {
                 throw new Error(`Bad Request`)
             }
             const updated = await this.cartDao.updateCart(fields)
@@ -143,9 +164,14 @@ class CartService {
      * @return {Object} an array of products purchased
      * @throws {Error}
      */
-    async purchaseProducts(args) {
+    async checkout(args) {
         try {
-
+            const userId = args.userId
+            if (isEmpty(userId)) {
+                throw new Error('Bad Request')
+            }
+            const products = await this.getCartByUser(userId)
+            console.log(products)
         } catch (err) {
             throw err
         }
